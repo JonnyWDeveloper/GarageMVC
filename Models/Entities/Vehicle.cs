@@ -6,28 +6,28 @@
         {
             get; set;
         }
-        public string? VehicleType
+        public VehicleType VehicleType
         {
             get; set;
         }
 
-        public string? RegNo
+        public string RegNo
         {
             get; set;
-        }
-        public string? Color
+        } = string.Empty;
+        public string Color
         {
             get; set;
-        }
+        } = string.Empty;
 
-        public string? Brand 
+        public string Brand
         {
             get; set;
-        }
-        public string? Model
+        } = string.Empty;
+        public string Model
         {
             get; set;
-        }
+        } = string.Empty;
         public int NoOfWheels
         {
             get; set;
