@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GarageMVC.Data;
+using GarageMVC.Models.ViewModels;
 using GarageMVC.Models.Entities;
 
 namespace GarageMVC.Controllers
@@ -25,6 +26,26 @@ namespace GarageMVC.Controllers
               return _context.Vehicle != null ? 
                           View(await _context.Vehicle.ToListAsync()) :
                           Problem("Entity set 'GarageMVCContext.Vehicle'  is null.");
+
+        }
+        // GET: Vehicles Overview
+        public async Task<IActionResult> Overview()
+        {            
+
+            IEnumerable<VehicleOverview> overview =
+                await _context.Vehicle.Select(v => new VehicleOverview()
+                {                 
+                    VehicleType = v.VehicleType,
+                    RegNo = v.RegNo,
+                    TimeOfArrival = v.TimeOfArrival
+                })
+                .OrderBy(p => p.RegNo)
+                .ToListAsync();
+
+            return _context.Vehicle != null ?
+                        View(overview) :
+                        Problem("Entity set 'GarageMVCContext.Vehicle'  is null.");
+
         }
 
         // GET: Vehicles/Details/5

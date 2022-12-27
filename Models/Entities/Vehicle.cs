@@ -1,4 +1,6 @@
-﻿namespace GarageMVC.Models.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace GarageMVC.Models.Entities
 {
     public class Vehicle
     {
@@ -35,6 +37,6 @@
         public DateTime TimeOfArrival
         {
             get; set;
-        }
+        } = DateTime.Now;
     }
 }

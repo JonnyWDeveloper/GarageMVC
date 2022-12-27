@@ -14,6 +14,6 @@ namespace GarageMVC.Data
         {
         }
 
-        public DbSet<GarageMVC.Models.Entities.Vehicle> Vehicle { get; set; } = default!;
+        public DbSet<Vehicle> Vehicle { get; set; } = default!;
     }
 }
