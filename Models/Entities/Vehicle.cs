@@ -34,7 +34,7 @@
         }
         public DateTime TimeOfArrival
         {
-            get;
+            get; set;
         }
     }
 }
