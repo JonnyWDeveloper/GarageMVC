@@ -2,10 +2,11 @@
 
 @{
     ViewData["Title"] = "Edit";
+    
 }
 
 <h1>Edit</h1>
-
+<p>[Edit.cshtml]</p>
 <h4>Vehicle</h4>
 <hr />
 <div class="row">
@@ -44,14 +45,14 @@
                 <span asp-validation-for="NoOfWheels" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit"  value="Save" class="btn btn-primary a" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" class="btn btn-primary a">Full view</a>
 </div>
 
 @section Scripts {
