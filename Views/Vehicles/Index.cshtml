@@ -1,11 +1,11 @@
-﻿@model IEnumerable<GarageMVC.Models.Entities.Vehicle>
+﻿@model IEnumerable<GarageMVC.Models.ViewModels.VehicleOverview>
 
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Full view</h1>
+<h1>Overview</h1>
 <p>[Index.cshtml]</p>
 <p>
     <a asp-action="Create" class="btn btn-primary">Park a new vehichle</a>
@@ -18,18 +18,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.RegNo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Color)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Brand)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Model)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NoOfWheels)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.TimeOfArrival)
@@ -46,18 +34,6 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.RegNo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Color)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Brand)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Model)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NoOfWheels)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.TimeOfArrival)

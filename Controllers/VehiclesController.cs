@@ -21,7 +21,7 @@ namespace GarageMVC.Controllers
         }
 
         // GET: Vehicles
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Overview()
         {
               return _context.Vehicle != null ? 
                           View(await _context.Vehicle.ToListAsync()) :
@@ -29,12 +29,13 @@ namespace GarageMVC.Controllers
 
         }
         // GET: Vehicles Overview
-        public async Task<IActionResult> Overview()
+        public async Task<IActionResult> Index()
         {            
 
             IEnumerable<VehicleOverview> overview =
                 await _context.Vehicle.Select(v => new VehicleOverview()
-                {                 
+                {
+                    Id = v.Id,
                     VehicleType = v.VehicleType,
                     RegNo = v.RegNo,
                     TimeOfArrival = v.TimeOfArrival
