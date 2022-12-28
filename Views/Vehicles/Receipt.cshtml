@@ -1,0 +1,53 @@
+﻿@model GarageMVC.Models.Entities.Vehicle
+
+@{
+    ViewData["Title"] = "Receipt";
+
+    DateTime park = Model.TimeOfArrival;
+    DateTime depart = DateTime.Now;
+    TimeSpan parkTime = depart - park;
+}
+<body style="max-width:800px">
+    <div style="text-align: center">
+        <h1>Receipt</h1>
+        <p>[Receipt.cshtml]</p>
+    </div>
+
+    <div style="float:right">
+        <!--Företagslogga-->
+        <!-- <img src=""> -->
+        <p>Parkeringshuset AB</p>
+        <p>625143-9472</p>
+        <a href="mailto: dummy@fake.mail">kundtjanst@parkeringshuset.se</a>
+        <p>08-555 555 55</p>
+    </div>
+
+    <div>
+        <p>Entry time: @Html.DisplayFor(model => model.TimeOfArrival)</p>
+        <p>Exit time: @DateTime.Now</p>
+        <p>Duration: @parkTime.Days days @parkTime.Hours hours @parkTime.Minutes minutes</p>
+        <p>In minutes: @parkTime.TotalMinutes</p>
+        <br>
+    </div>
+
+    <div>
+        <p>Customer ID: @Html.DisplayFor(model => model.VehicleType) @park.Microsecond 400-@Html.DisplayFor(model => model.Id)</p>
+        <p>Registration number: @Html.DisplayFor(model => model.RegNo)</p>
+        <br>
+    </div>
+
+    <div style="text-align: center; font-weight:bolder">
+        <h3>Total cost: 380kr</h3>
+        <br>
+        <p>Parking fee: 150kr</p>
+        <p>Arrival fee: 65kr</p>
+        <p>Registration fee: 45kr</p>
+        <p>Receipt fee: 120kr</p>
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id" />
+            <input type="submit" value="Print & checkout" class="btn btn-danger" /> |
+            <a asp-action="Index" class="btn btn-primary">Full view</a>
+        </form>
+    </div>
+</body>
