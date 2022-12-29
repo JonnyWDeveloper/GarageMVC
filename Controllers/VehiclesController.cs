@@ -217,6 +217,22 @@ namespace GarageMVC.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        // GET: Vehicles/Receipt
+        public async Task<IActionResult> Receipt(int? id)
+        {
+            if (id == null || _context.Vehicle == null)
+            {
+                return NotFound();
+            }
+
+            var vehicle = await _context.Vehicle.FindAsync(id);
+            if (vehicle == null)
+            {
+                return NotFound();
+            }
+            return View(vehicle);
+        }
+
         private bool VehicleExists(int id)
         {
             return (_context.Vehicle?.Any(e => e.Id == id)).GetValueOrDefault();
