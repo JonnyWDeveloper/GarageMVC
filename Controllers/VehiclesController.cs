@@ -23,14 +23,14 @@ namespace GarageMVC.Controllers
         // GET: Vehicles
         public async Task<IActionResult> Overview()
         {
-              return _context.Vehicle != null ? 
-                          View(await _context.Vehicle.ToListAsync()) :
-                          Problem("Entity set 'GarageMVCContext.Vehicle'  is null.");
+            return _context.Vehicle != null ?
+                        View(await _context.Vehicle.ToListAsync()) :
+                        Problem("Entity set 'GarageMVCContext.Vehicle'  is null.");
 
         }
         // GET: Vehicles Overview
         public async Task<IActionResult> Index()
-        {            
+        {
 
             IEnumerable<VehicleOverview> overview =
                 await _context.Vehicle.Select(v => new VehicleOverview()
@@ -42,6 +42,30 @@ namespace GarageMVC.Controllers
                 })
                 .OrderBy(p => p.RegNo)
                 .ToListAsync();
+
+            if (TempData.ContainsKey("parked"))
+            {
+                ViewData["ShowElement"] = TempData["parked"];
+            }
+            if (TempData.ContainsKey("checkedout"))
+            {
+                ViewData["ShowElement"] = TempData["checkedout"];
+            }
+            if (TempData.ContainsKey("updated"))
+            {
+                ViewData["ShowElement"] = TempData["updated"];
+            }
+            if (TempData.ContainsKey("RegNo"))
+            {
+                ViewData["RegNo"] = TempData["RegNo"];
+            }
+            if (TempData.ContainsKey("VehicleType"))
+            {
+                ViewData["VehicleType"] = TempData["VehicleType"];
+            }
+
+            //TempData.Keep("updated");
+            //TempData.Keep();
 
             return _context.Vehicle != null ?
                         View(overview) :
@@ -84,8 +108,14 @@ namespace GarageMVC.Controllers
             {
                 _context.Add(vehicle);
                 await _context.SaveChangesAsync();
+
+                TempData["parked"] = "parked";
+                TempData["RegNo"] = vehicle.RegNo;
+                TempData["VehicleType"] = Enum.GetName(typeof(VehicleType), vehicle.VehicleType);
+
                 return RedirectToAction(nameof(Index));
             }
+
             return View(vehicle);
         }
 
@@ -102,6 +132,7 @@ namespace GarageMVC.Controllers
             {
                 return NotFound();
             }
+
             return View(vehicle);
         }
 
@@ -135,6 +166,11 @@ namespace GarageMVC.Controllers
                         throw;
                     }
                 }
+
+                TempData["updated"] = "updated";
+                TempData["RegNo"] = vehicle.RegNo;
+                TempData["VehicleType"] = Enum.GetName(typeof(VehicleType), vehicle.VehicleType);
+
                 return RedirectToAction(nameof(Index));
             }
             return View(vehicle);
@@ -170,16 +206,20 @@ namespace GarageMVC.Controllers
             var vehicle = await _context.Vehicle.FindAsync(id);
             if (vehicle != null)
             {
+                TempData["checkedout"] = "checkedout";
+                TempData["RegNo"] = vehicle.RegNo;
+                TempData["VehicleType"] = Enum.GetName(typeof(VehicleType), vehicle.VehicleType);
+
                 _context.Vehicle.Remove(vehicle);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool VehicleExists(int id)
         {
-          return (_context.Vehicle?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Vehicle?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

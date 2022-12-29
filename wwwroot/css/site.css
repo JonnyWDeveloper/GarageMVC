@@ -21,7 +21,7 @@ body {
   margin-bottom: 60px;
 }
 #footer {
-    position: relative;
+    position: fixed;
 }
 .a {
     margin-top: .5rem;

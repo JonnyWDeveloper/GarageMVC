@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+ using Microsoft.AspNetCore.Http;
 using GarageMVC.Data;
 namespace GarageMVC
 {
@@ -16,6 +17,7 @@ namespace GarageMVC
 
             var app = builder.Build();
 
+    
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
@@ -28,9 +30,11 @@ namespace GarageMVC
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            
             app.UseAuthorization();
 
+            
+          
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Vehicles}/{action=Index}/{id?}");
