@@ -4,7 +4,13 @@
 
     DateTime park = Model.TimeOfArrival;
     DateTime depart = DateTime.Now;
-    TimeSpan parkTime = depart - park;
+    TimeSpan parkTimeSpan = depart - park;
+
+    int parkTimeMinutes = (int)Math.Round(parkTimeSpan.TotalMinutes);
+
+    int startingCost = 160, CostPerMinute = 1, arrivalFee = 65, registrationFee = 45, receiptFee = 120;
+    int parkingCost = parkTimeMinutes * CostPerMinute;
+    int totalCost = startingCost + parkingCost + arrivalFee + registrationFee + receiptFee;
 }
 <div class="container" style="width: 100%;">
     <div class="card border-dark mb-3 card-extension">
@@ -36,30 +42,36 @@
             <p></p>
             <p class="card-text leftRight"><span>Entry time:</span> <span>@Html.DisplayFor(model => model.TimeOfArrival)</span></p>
             <p class="card-text leftRight"><span>Exit time:</span>  <span>@DateTime.Now</span></p>
-            <p class="card-text leftRight"><span>Duration:</span>   <span>@parkTime.Days days @parkTime.Hours hours @parkTime.Minutes minutes</span></p>
-            <p class="card-text leftRight"><span>In minutes:</span> <span>@parkTime.TotalMinutes</span></p>
+            <p class="card-text leftRight"><span>Duration:</span>   <span>@parkTimeSpan.Days days @parkTimeSpan.Hours hours @parkTimeSpan.Minutes minutes</span></p>
+            <p class="card-text leftRight"><span>In minutes:</span> <span>@parkTimeMinutes</span></p>
             <p class="card-text leftRight"><span>Customer ID:</span><span>@Html.DisplayFor(model => model.VehicleType) @park.Microsecond 400-@Html.DisplayFor(model => model.Id)</span></p>
             <p class="card-text leftRight">
-                <span>Parking fee:</span>
-                <span>SEK 150</span>
+                <span>Starting cost:</span>
+                <span>SEK @startingCost</span>
             </p>
+
+            <p class="card-text leftRight">
+                <span>Minutes cost:</span>
+                <span>SEK @parkingCost</span>
+            </p>
+          
             <p class="card-text leftRight">
                 <span>Arrival fee:</span>
-                <span>SEK 65</span>
+                <span>SEK @arrivalFee</span>
             </p>
             <p class="card-text leftRight">
                 <span>Registration fee:</span>
-                <span>SEK 45</span>
+                <span>SEK @registrationFee</span>
             </p>
             <p class="card-text leftRight">
                 <span>  Receipt fee:</span>
-                <span>SEK 120</span>
+                <span>SEK @receiptFee</span>
             </p>
             <p class="card-text"></p>
             <hr role="separator" class="separator"/>
             <h6 class="text-black leftRight">
                 <span>Total:</span>
-                <span>SEK 380</span>
+                <span>SEK @totalCost</span>
             </h6>
             <p class="card-text"></p>
             <p class="card-text"></p>
