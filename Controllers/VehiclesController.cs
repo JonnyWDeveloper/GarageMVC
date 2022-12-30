@@ -151,7 +151,7 @@ namespace GarageMVC.Controllers
             if (ModelState.IsValid)
             {
                 try
-                {
+                {                   
                     _context.Update(vehicle);
                     await _context.SaveChangesAsync();
                 }
