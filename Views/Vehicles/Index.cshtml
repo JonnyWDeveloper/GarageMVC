@@ -13,32 +13,36 @@
     <a asp-action="Create" class="btn btn-primary">Park a new vehichle</a>
 
     <div id="parked" hidden="hidden" class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Your @ViewData["VehicleType"] with registration number: @ViewData["RegNo"] has parked!</strong>&nbsp;
+        Your  <strong>
+            @ViewData["VehicleType"]
+        </strong> with registration number:  <strong>@ViewData["RegNo"]</strong> has parked!
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
         </button>
     </div>
     <div id="checkedout" hidden="hidden" class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong>Your @ViewData["VehicleType"] with registration number: @ViewData["RegNo"] has checked out!</strong>&nbsp;
+        Your  <strong>@ViewData["VehicleType"]</strong> with registration number: <strong>@ViewData["RegNo"]</strong> has checked out!
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
         </button>
     </div>
     <div id="updated" hidden="hidden" class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Your @ViewData["VehicleType"] with registration number: @ViewData["RegNo"] has been updated!</strong>&nbsp;
+        Your <span>  <strong>@ViewData["VehicleType"]</strong></span> with registration number: <span><strong>@ViewData["RegNo"]</strong></span> has been updated!&nbsp;
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
         </button>
     </div>
     @if (ViewData["ShowElement"] != null)
     {
         <script>
-            let parked = document.querySelector("#parked");
-            let checkedout = document.querySelector("#checkedout");
-            let updated = document.querySelector("#updated");
+            function showElement() {
+                let parked = document.querySelector("#parked");
+                let checkedout = document.querySelector("#checkedout");
+                let updated = document.querySelector("#updated");
+                let element = @ViewData["ShowElement"];
 
-            let element = @ViewData["ShowElement"];
-
-            if (element == parked || element == checkedout || element == updated) {
-                element.removeAttribute("hidden");
+                if (element == parked || element == checkedout || element == updated) {
+                    element.removeAttribute("hidden");
+                }
             }
+            showElement();
         </script>
     }
     @* else
@@ -49,13 +53,6 @@
     element.innerText ="An error ocurred!";
     </script>
     }*@
-
-    @* <div class="alert alert-success" role="alert">
-    <h4 class="alert-heading">Well done!</h4>
-    <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
-    <hr>
-    <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
-    </div>*@
 </p>
 <table class="table">
     <thead>
