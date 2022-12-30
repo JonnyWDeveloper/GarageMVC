@@ -73,6 +73,25 @@ namespace GarageMVC.Controllers
 
         }
 
+        // Testing - Search
+        public async Task<IActionResult> Search(string searchString)
+        {
+            IEnumerable<VehicleOverview> overview =
+                await _context.Vehicle
+                .Where(v => v.RegNo.StartsWith(searchString))
+                .Select(v => new VehicleOverview
+                {
+                    Id = v.Id,
+                    VehicleType = v.VehicleType,
+                    RegNo = v.RegNo,
+                    TimeOfArrival = v.TimeOfArrival
+                })
+                .ToListAsync();
+            return _context.Vehicle != null ?
+                View("Index", overview) :
+                Problem("Entity set 'GarageMVCContext.Vehicle'  is null.");
+        }
+
         // GET: Vehicles/Details/5
         public async Task<IActionResult> Details(int? id)
         {

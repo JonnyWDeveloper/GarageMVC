@@ -10,7 +10,18 @@
 <h1>Overview</h1>
 <p>[Index.cshtml]</p>
 <p>
-    <a asp-action="Create" class="btn btn-primary">Park a new vehichle</a>
+    <form asp-action="Search">
+        <div class="input-group">
+            <p>
+                <a asp-action="Create" class="btn btn-primary">Park a new vehichle</a>
+            </p>
+            @*<label class="form-label m-2">Search</label>*@
+            <input type="text" name="searchString" class="form-control" placeholder="Enter RegNo" style="margin-left: 4%; max-height:35px; max-width:160px" />
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-primary">Find</button>
+            </div>
+        </div>
+    </form>
 
     <div id="parked" hidden="hidden" class="alert alert-success alert-dismissible fade show" role="alert">
         Your  <strong>
