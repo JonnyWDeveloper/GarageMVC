@@ -1,28 +1,72 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
+
 #footer {
     position: relative;
 }
+
 .a {
     margin-top: .5rem;
+}
+
+span .leftAlign {
+}
+
+span .rightAlign {
+}
+
+div .card-extension {
+    max-width: 20rem;
+    position: relative;
+    margin: auto;
+}
+
+.card-title-extension {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.leftRight {
+    display: flex;
+    justify-content: space-between;
+}
+
+.separator {
+    opacity: 1.0;
+    background-color: inherit;
+    border-top: 1.5px dashed ;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    border-right-width: 0;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: .5rem;
+    text-align: center;
+}
+
+.font-color-receipt {
+    color: black;
 }

@@ -150,22 +150,33 @@ namespace GarageMVC.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(vehicle);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!VehicleExists(vehicle.Id))
+                var vehicleToUpdate = await _context.Vehicle.FirstOrDefaultAsync(v => v.Id == id);
+
+                if (await TryUpdateModelAsync<Vehicle>(vehicleToUpdate, "",
+                    v => v.VehicleType,
+                    v => v.RegNo,
+                    v => v.Color,
+                    v => v.Brand,
+                    v => v.Model,
+                    v => v.NoOfWheels))
+
+                    try
                     {
-                        return NotFound();
+                     
+                      // _context.Update(vehicle);
+                        await _context.SaveChangesAsync();
                     }
-                    else
+                    catch (DbUpdateConcurrencyException)
                     {
-                        throw;
+                        if (!VehicleExists(vehicle.Id))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
                     }
-                }
 
                 TempData["updated"] = "updated";
                 TempData["RegNo"] = vehicle.RegNo;

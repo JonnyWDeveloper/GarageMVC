@@ -4,7 +4,7 @@
     {
         Airplane,
         Boat,
-        Buss,
+        Bus,
         Car,
         Motorcycle
     }
