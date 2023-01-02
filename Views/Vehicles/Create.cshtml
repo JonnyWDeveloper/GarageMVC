@@ -4,11 +4,19 @@
     ViewData["Title"] = "Park";
 }
 
+
+
 <h1>Park</h1>
 <p>[Create.cshtml]</p>
 <h4>Vehicle</h4>
 <hr />
 <div class="row">
+    <div id="regNoError" hidden="hidden" class="alert alert-warning alert-dismissible fade show" role="alert">
+        A vehicle of type:&nbsp;<strong>@ViewData["VehicleType"]</strong>  with the following  RegNo:
+        <strong>@ViewData["RegNo"]</strong> is registred as parked. <br /> Enter another registration number.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+        </button>
+    </div>
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -43,7 +51,7 @@
                 <span asp-validation-for="NoOfWheels" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Park" class="btn btn-primary a" />
+                <input type="submit" id="createButton" value="Park" class="btn btn-primary a" />
             </div>
         </form>
     </div>
@@ -52,7 +60,32 @@
 <div>
     <a asp-action="Index" class="btn btn-primary a">Overview</a>
 </div>
+@if (TempData.ContainsKey("error") && @ViewData["RegNo"] != null)
+{
+    <script>
+
+        function showError() {
+            element.removeAttribute("hidden");
+            
+        }
+
+        let element = document.querySelector("#regNoError");
+        let button = document.querySelector("#createButton")
+        button.addEventListener('submit', showError)
+
+        showError();
+    </script>
+}
+
+else
+{
+    <script>
+             document.querySelector("#regNoError").setAttribute("hidden", "hidden");
+    </script>
+}
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

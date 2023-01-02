@@ -54,7 +54,7 @@ div .card-extension {
 .separator {
     opacity: 1.0;
     background-color: inherit;
-    border-top: 1.5px dashed ;
+    border-top: 1.5px dashed;
     border-bottom-width: 0;
     border-left-width: 0;
     border-right-width: 0;
@@ -69,4 +69,37 @@ div .card-extension {
 
 .font-color-receipt {
     color: black;
+}
+
+.form-control:disabled, .form-control[readonly] {
+  
+    background-color: aliceblue;
+    opacity: 1;
+    font-weight: 600;
+}
+.christer-search-box {
+    
+    margin-left: 1.5rem;
+    margin-right: .5rem;
+    height: inherit;
+    max-width: 160px;
+    margin-bottom: 0px;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: .375rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.div-search {
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-start;
+    margin-bottom:.5rem;
 }

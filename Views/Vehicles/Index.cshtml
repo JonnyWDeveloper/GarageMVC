@@ -6,65 +6,52 @@
 
 }
 
-
 <h1>Overview</h1>
 <p>[Index.cshtml]</p>
-<p>
-    <form asp-action="Search">
-        <div class="input-group">
-            <p>
-                <a asp-action="Create" class="btn btn-primary">Park a new vehichle</a>
-            </p>
-            @*<label class="form-label m-2">Search</label>*@
-            <input type="text" name="searchString" class="form-control" placeholder="Enter RegNo" style="margin-left: 4%; max-height:35px; max-width:160px" />
-            <div class="input-group-append">
-                <button type="submit" class="btn btn-primary">Find</button>
-            </div>
-        </div>
-    </form>
 
-    <div id="parked" hidden="hidden" class="alert alert-success alert-dismissible fade show" role="alert">
-        Your  <strong>
-            @ViewData["VehicleType"]
-        </strong> with registration number:  <strong>@ViewData["RegNo"]</strong> has parked!
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-        </button>
+<form asp-action="Search">
+    <div class="div-search">
+        <a asp-action="Create" class="btn btn-primary">Park a new vehichle</a>
+        <input type="text" name="searchString" class="christer-search-box" placeholder="Enter RegNo" />
+        <button type="submit" class="btn btn-primary">Find</button>
     </div>
-    <div id="checkedout" hidden="hidden" class="alert alert-warning alert-dismissible fade show" role="alert">
-        Your  <strong>@ViewData["VehicleType"]</strong> with registration number: <strong>@ViewData["RegNo"]</strong> has checked out!
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-        </button>
-    </div>
-    <div id="updated" hidden="hidden" class="alert alert-info alert-dismissible fade show" role="alert">
-        Your <span>  <strong>@ViewData["VehicleType"]</strong></span> with registration number: <span><strong>@ViewData["RegNo"]</strong></span> has been updated!&nbsp;
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-        </button>
-    </div>
-    @if (ViewData["ShowElement"] != null)
-    {
-        <script>
-            function showElement() {
-                let parked = document.querySelector("#parked");
-                let checkedout = document.querySelector("#checkedout");
-                let updated = document.querySelector("#updated");
-                let element = @ViewData["ShowElement"];
+</form>
 
-                if (element == parked || element == checkedout || element == updated) {
-                    element.removeAttribute("hidden");
-                }
+<div id="parked" hidden="hidden" class="alert alert-success alert-dismissible fade show" role="alert">
+    Your  <strong>
+        @ViewData["VehicleType"]
+    </strong> with registration number:  <strong>@ViewData["RegNo"]</strong> has parked!
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+    </button>
+</div>
+<div id="checkedout" hidden="hidden" class="alert alert-warning alert-dismissible fade show" role="alert">
+    Your  <strong>@ViewData["VehicleType"]</strong> with registration number: <strong>@ViewData["RegNo"]</strong> has checked out!
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+    </button>
+</div>
+<div id="updated" hidden="hidden" class="alert alert-info alert-dismissible fade show" role="alert">
+    Your <span>  <strong>@ViewData["VehicleType"]</strong></span> with registration number: <span><strong>@ViewData["RegNo"]</strong></span> has been updated!&nbsp;
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+    </button>
+</div>
+@if (ViewData["ShowElement"] != null)
+{
+    <script>
+        function showElement() {
+            let parked = document.querySelector("#parked");
+            let checkedout = document.querySelector("#checkedout");
+            let updated = document.querySelector("#updated");
+            let element = @ViewData["ShowElement"];
+
+            if (element == parked || element == checkedout || element == updated) {
+                element.removeAttribute("hidden");
             }
-            showElement();
-        </script>
-    }
-    @* else
-    {
-    <script type="text/javascript">
-    let element = document.querySelector("#checkedout");
-    element.removeAttribute("hidden");
-    element.innerText ="An error ocurred!";
+        }
+        showElement();
     </script>
-    }*@
-</p>
+}
+
+
 <table class="table">
     <thead>
         <tr>
@@ -83,6 +70,7 @@
     <tbody>
         @foreach (var item in Model)
         {
+
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.VehicleType)

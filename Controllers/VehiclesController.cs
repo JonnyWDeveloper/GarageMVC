@@ -31,7 +31,7 @@ namespace GarageMVC.Controllers
         // GET: Vehicles Overview
         public async Task<IActionResult> Index()
         {
-
+           
             IEnumerable<VehicleOverview> overview =
                 await _context.Vehicle.Select(v => new VehicleOverview()
                 {
@@ -63,14 +63,11 @@ namespace GarageMVC.Controllers
             {
                 ViewData["VehicleType"] = TempData["VehicleType"];
             }
-
-            //TempData.Keep("updated");
-            //TempData.Keep();
+           
 
             return _context.Vehicle != null ?
                         View(overview) :
                         Problem("Entity set 'GarageMVCContext.Vehicle'  is null.");
-
         }
 
         // Testing - Search
@@ -125,6 +122,16 @@ namespace GarageMVC.Controllers
         {
             if (ModelState.IsValid)
             {
+                var vehicleExists = await _context.Vehicle.FirstOrDefaultAsync(v => v.RegNo == vehicle.RegNo);
+
+                if (vehicleExists != null)
+                {
+                    ViewData["VehicleType"] = vehicleExists.VehicleType;
+                    ViewData["RegNo"] = vehicleExists.RegNo;
+                    TempData["error"] = "error";
+                    return View(vehicle);
+                }
+
                 _context.Add(vehicle);
                 await _context.SaveChangesAsync();
 
@@ -168,7 +175,7 @@ namespace GarageMVC.Controllers
             }
 
             if (ModelState.IsValid)
-            {
+            {               
                 var vehicleToUpdate = await _context.Vehicle.FirstOrDefaultAsync(v => v.Id == id);
 
                 if (await TryUpdateModelAsync<Vehicle>(vehicleToUpdate, "",
@@ -181,8 +188,8 @@ namespace GarageMVC.Controllers
 
                     try
                     {
-                     
-                      // _context.Update(vehicle);
+
+                        // _context.Update(vehicle);
                         await _context.SaveChangesAsync();
                     }
                     catch (DbUpdateConcurrencyException)
