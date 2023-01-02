@@ -1,14 +1,15 @@
 ﻿@model IEnumerable<GarageMVC.Models.Entities.Vehicle>
 @{
-    ViewData["Title"] = "Overview";
+    ViewData["Title"] = "Full view";
 }
 <br />
 <h2>Full view</h2>
-<br />
-<p>
+
+
    <a asp-action="Create" class="btn btn-primary">Park a new vehichle</a>
-</p>
-<table class="table">
+<br />
+
+<table class="table table-top" >
     <thead>
         <tr>
             <th>

@@ -106,3 +106,6 @@ div .card-extension {
 .bolder{
     font-weight:bolder;
 }
+.table-top {
+    margin-top: .5rem;
+}
