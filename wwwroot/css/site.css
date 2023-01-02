@@ -103,3 +103,6 @@ div .card-extension {
     justify-content: flex-start;
     margin-bottom:.5rem;
 }
+.bolder{
+    font-weight:bolder;
+}

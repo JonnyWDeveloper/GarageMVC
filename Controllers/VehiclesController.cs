@@ -21,7 +21,7 @@ namespace GarageMVC.Controllers
         }
 
         // GET: Vehicles
-        public async Task<IActionResult> Overview()
+        public async Task<IActionResult> Fullview()
         {
             return _context.Vehicle != null ?
                         View(await _context.Vehicle.ToListAsync()) :

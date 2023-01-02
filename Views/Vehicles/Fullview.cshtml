@@ -2,9 +2,9 @@
 @{
     ViewData["Title"] = "Overview";
 }
-
-<h1>Full view</h1>
-<p>[Overview.cshtml]</p> 
+<br />
+<h2>Full view</h2>
+<br />
 <p>
    <a asp-action="Create" class="btn btn-primary">Park a new vehichle</a>
 </p>
@@ -59,12 +59,7 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.TimeOfArrival)
-                </td>
-                @*<td>
-                   <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Checkout</a>
-                </td>*@
+                </td>           
             </tr>
         }
     </tbody>
