@@ -120,6 +120,7 @@ namespace GarageMVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,VehicleType,RegNo,Color,Brand,Model,NoOfWheels")] Vehicle vehicle)
         {
+            
             if (ModelState.IsValid)
             {
                 var vehicleExists = await _context.Vehicle.FirstOrDefaultAsync(v => v.RegNo == vehicle.RegNo);
@@ -138,6 +139,7 @@ namespace GarageMVC.Controllers
                 TempData["parked"] = "parked";
                 TempData["RegNo"] = vehicle.RegNo;
                 TempData["VehicleType"] = Enum.GetName(typeof(VehicleType), vehicle.VehicleType);
+                ViewData["ModelState"] = ModelState.Values;
 
                 return RedirectToAction(nameof(Index));
             }
@@ -176,9 +178,9 @@ namespace GarageMVC.Controllers
 
             if (ModelState.IsValid)
             {               
-                var vehicleToUpdate = await _context.Vehicle.FirstOrDefaultAsync(v => v.Id == id);
+                var  vehicleToUpdate = await _context.Vehicle.FirstOrDefaultAsync(v => v.Id == id);
 
-                if (await TryUpdateModelAsync<Vehicle>(vehicleToUpdate, "",
+                if (await TryUpdateModelAsync<Vehicle>(vehicleToUpdate!, "",
                     v => v.VehicleType,
                     v => v.RegNo,
                     v => v.Color,
@@ -207,6 +209,7 @@ namespace GarageMVC.Controllers
                 TempData["updated"] = "updated";
                 TempData["RegNo"] = vehicle.RegNo;
                 TempData["VehicleType"] = Enum.GetName(typeof(VehicleType), vehicle.VehicleType);
+                TempData["ModelState"] = ModelState;
 
                 return RedirectToAction(nameof(Index));
             }
